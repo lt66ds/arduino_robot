@@ -87,7 +87,7 @@ char R_car_test(){//检测右侧车位，返回0或1
   //delay(800); 
   char n=0;
   char i=0;
-  while(i<15){//检测次数
+  while(i<30){//检测次数
    D=sr_R.Distance();//获取右侧模块的检测距离
    if(D<full_distance) ++n;//对有效距离的次数进行累计
    ++i;
@@ -337,14 +337,16 @@ void loop() {
 //  {
 //    motoStop();
 //  }
-  if (L1==HIGH && L2==HIGH)
-  {
-    //仅左二传感器均探测到线，可前进
-    turnLeft();
-  }
-  else if (R1==HIGH && R2==HIGH)
+//  if (L1==HIGH && L2==HIGH)
+//  {
+//    //仅左二传感器均探测到线，可前进
+//    turnLeft();
+//  }
+//  else 
+  if (L1==HIGH && L2==HIGH && R1==HIGH && R2==HIGH)
   {
     char r_car=R_car_test();
+    counter++;
     if (r_car==1)
     {
       motoStop();
@@ -375,6 +377,7 @@ void loop() {
   else if (L2==LOW && L1==LOW && R1==LOW && R2==LOW)
   {
     rotateRight();
+    
   }
 
 
